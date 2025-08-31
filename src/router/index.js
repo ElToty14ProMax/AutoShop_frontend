@@ -1,25 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { useAuthStore } from '../stores/auth'
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+  { path: '/', component: () => import('../views/HomeView.vue') },
+  { path: '/catalog', component: () => import('../views/CatalogView.vue') },
+  { path: '/cart', component: () => import('../views/CartView.vue'), meta: { auth: true, role: ['client','admin','manicurist'] } },
+  { path: '/checkout', component: () => import('../views/CheckoutView.vue'), meta: { auth: true, role: ['client','admin','manicurist'] } },
+  { path: '/orders', component: () => import('../views/OrdersView.vue'), meta: { auth: true } },
+  { path: '/addresses', component: () => import('../views/AddressesView.vue'), meta: { auth: true } },
+  { path: '/login', component: () => import('../views/LoginView.vue') },
+  { path: '/register', component: () => import('../views/RegisterView.vue') },
+  ]
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+const router = createRouter({ history: createWebHistory(), routes })
+
+router.beforeEach((to) => {
+  const auth = useAuthStore()
+  if (to.meta?.auth && !auth.token) return { path: '/login' }
+  if (to.meta?.role && !to.meta.role.includes(auth.user?.role)) return { path: '/' }
 })
 
 export default router
+
+

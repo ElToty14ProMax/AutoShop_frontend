@@ -1,0 +1,126 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* Base styles */
+body {
+  @apply bg-slate-50 text-slate-800;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-feature-settings: 'cv11', 'ss01';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  @apply text-blue-600 decoration-transparent underline-offset-2 transition-all duration-200 hover:text-blue-700 hover:decoration-current;
+}
+
+/* Button Components */
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+@utility btn-primary {
+  @apply btn bg-blue-600 text-white shadow-sm hover:bg-blue-700 hover:shadow-md focus:ring-blue-500 active:bg-blue-800;
+}
+
+@utility btn-secondary {
+  @apply btn bg-slate-100 text-slate-700 hover:bg-slate-200 focus:ring-slate-400;
+}
+
+@utility btn-outline {
+  @apply btn border border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 hover:border-slate-300 focus:ring-slate-400;
+}
+
+@utility btn-ghost {
+  @apply btn text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus:ring-slate-400;
+}
+
+/* Card Components */
+@utility card {
+  @apply bg-white rounded-2xl shadow-sm border border-slate-100 p-6 transition-all duration-200 hover:shadow-md;
+}
+
+@utility card-compact {
+  @apply card p-4;
+}
+
+@utility card-elevated {
+  @apply card shadow-lg hover:shadow-xl;
+}
+
+/* Badge Components */
+@utility badge {
+  @apply inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full transition-colors;
+}
+
+@utility badge-primary {
+  @apply badge bg-blue-50 text-blue-700 ring-1 ring-blue-600/20;
+}
+
+@utility badge-secondary {
+  @apply badge bg-slate-100 text-slate-700;
+}
+
+@utility badge-success {
+  @apply badge bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20;
+}
+
+@utility badge-warning {
+  @apply badge bg-amber-50 text-amber-700 ring-1 ring-amber-600/20;
+}
+
+/* Glass Components */
+@utility glass {
+  @apply bg-white/80 backdrop-blur-sm border border-white/60 shadow-lg;
+}
+
+@utility glass-strong {
+  @apply glass bg-white/90 backdrop-blur-md border-white/70;
+}
+
+/* Form Components */
+@utility input {
+  @apply block w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm placeholder-slate-400 transition-colors focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500;
+}
+
+/* Utility Classes */
+@utility divider {
+  @apply border-t border-slate-100;
+}
+
+@utility divider-strong {
+  @apply border-t border-slate-200;
+}
+
+@utility fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Global focus styles */
+*:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    @apply hidden;
+  }
+
+  .card {
+    @apply shadow-none border border-slate-200;
+  }
+}
